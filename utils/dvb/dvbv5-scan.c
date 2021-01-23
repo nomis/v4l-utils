@@ -216,6 +216,14 @@ static int check_frontend(void *__args,
 	return (status & FE_HAS_LOCK) ? 0 : -1;
 }
 
+static const char *polarization_name[] = {
+	[POLARIZATION_OFF] = "-",
+	[POLARIZATION_H] = "H",
+	[POLARIZATION_V] = "V",
+	[POLARIZATION_L] = "L",
+	[POLARIZATION_R] = "R",
+};
+
 static int run_scan(struct arguments *args, struct dvb_device *dvb)
 {
 	struct dvb_v5_fe_parms *parms = dvb->fe_parms;
@@ -283,7 +291,7 @@ static int run_scan(struct arguments *args, struct dvb_device *dvb)
 			continue;
 
 		count++;
-		dvb_log(_("Scanning frequency #%d %d"), count, freq);
+		dvb_log(_("Scanning frequency #%d %d %s"), count, freq, polarization_name[pol]);
 
 		/*
 		 * update params->lnb only if it differs from entry->lnb
