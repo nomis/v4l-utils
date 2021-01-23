@@ -104,6 +104,7 @@ static int verbose = 0;
 		fprintf(stderr, _("ERROR: "));                             \
 		fprintf(stderr, x);                                     \
 		fprintf(stderr, "\n");                                 \
+		fflush(stderr); \
 	} while (0)
 
 #define PERROR(x...)                                                    \
@@ -111,6 +112,7 @@ static int verbose = 0;
 		fprintf(stderr, _("ERROR: "));                             \
 		fprintf(stderr, x);                                     \
 		fprintf(stderr, " (%s)\n", strerror(errno));		\
+		fflush(stderr); \
 	} while (0)
 
 static int print_frontend_stats(struct arguments *args,
@@ -208,6 +210,7 @@ static int check_frontend(void *__args,
 
 	if (isatty(STDERR_FILENO)) {
 		fprintf(stderr, "\x1b[37m");
+		fflush(stderr);
 	}
 
 	return (status & FE_HAS_LOCK) ? 0 : -1;
