@@ -72,6 +72,7 @@ void dvb_default_log(int level, const char *fmt, ...)
 	fprintf(out, "\n");
 	if(loglevels[level].color && isatty(loglevels[level].fd))
 		fputs(loglevels[LOG_COLOROFF].color, out);
+	fflush(out);
 	va_end(ap);
 }
 
